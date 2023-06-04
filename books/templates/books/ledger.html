@@ -1,0 +1,39 @@
+{% extends './base.html' %}
+
+
+{% block content %}
+
+<h1>Ledger</h1>
+<table class="table table-bordered">
+  <tr>
+    <th class="text-center">№</th>
+    <th class="text-center">Date</th>
+    <th class="text-center">Amount</th>
+    <th class="text-center">Account</th>
+    <th class="text-center">Direction</th>
+  </tr>
+  {% for entry in object_list %}
+  <tr>
+    <td class="text-center">{{ entry.transaction_id }}</td>
+    <td>{{ entry.date|date:"Y-m-d H:m:s" }}</td>
+    <td class="text-right">{{ entry.amount }}</td>
+    <td>{{ entry.account }}</td>
+    <td class="text-center">{{ entry.direction }}</td>
+    <td>
+      <button type="button" class="btn btn-success">
+        <a href="/{{ entry.id }}/update">Upd</a>
+      </button>
+    </td>
+    <td>
+      <button type="button" class="btn btn-warning">
+        <a href="/{{ entry.id }}/delete">Del</a>
+      </button>
+    </td>
+  </tr>    
+  {% endfor %}
+</table>
+<button type="button", class="btn btn-info">
+  <a href="/create/">Add transaction</a>
+</button>
+
+{% endblock %}
